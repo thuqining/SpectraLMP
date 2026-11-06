@@ -1,0 +1,51 @@
+% Fig. 1: framework, merged into one PDF (pdflatex fig_framework.tex).
+% fig_frame1c.pdf (8.85 x 3.9 cm, code/fig_frame1c.m) holds the panels:
+% offline axes x 3.85-7.75, y 2.58-3.52; online axes x 3.85-7.75,
+% y 0.58-1.52 (cm). Equation numbers follow the letter.
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{mathptmx}
+\usetikzlibrary{arrows.meta}
+\definecolor{stg}{RGB}{192,0,0}
+\begin{document}
+\begin{tikzpicture}[font=\scriptsize, >={Stealth[length=3pt]},
+  arr/.style={->, line width=0.5pt, black!75},
+  box/.style={draw=black!55, rounded corners=1.5pt, fill=white, align=center,
+              inner sep=1.5pt, text width=2.00cm, minimum height=0.62cm},
+  stp/.style={font=\tiny, text=black!60, inner sep=0.5pt, anchor=south west},
+  lab/.style={font=\tiny, text=black!70, above, inner sep=1pt},
+  vl/.style={font=\tiny, text=black!70, right, inner sep=1.5pt},
+  stage/.style={text=stg, font=\scriptsize\bfseries, inner sep=1pt, anchor=north east}]
+\useasboundingbox (0,0) rectangle (8.85,3.90);
+\fill[black!5, rounded corners=2pt] (0,2.00) rectangle (8.85,3.90);
+\fill[blue!5, rounded corners=2pt] (0,0) rectangle (8.85,1.90);
+\node[anchor=south west, inner sep=0pt] at (0,0) {\includegraphics{fig_frame1c.pdf}};
+% input
+\node[draw=black!55, rounded corners=1.5pt, fill=white, minimum width=0.38cm,
+      minimum height=3.86cm, inner sep=0pt] (n) at (0.29,1.95) {};
+\node[rotate=90] at (n) {Uncertain net load};
+% stages
+\node[stage] at (8.82,3.87) {Offline};
+\node[stage] at (8.82,1.87) {Online};
+% boxes: one column, equal size and spacing
+\node[box] (b) at (2.28,3.40) {Hindsight ED (1),\\LMP averages (4)};
+\node[stp] at (b.north west) {Steps 1--2};
+\node[box] (c) at (2.28,2.55) {Fit predictor\\of the averages};
+\node[stp] at (c.north west) {Step 3};
+\node[box] (e) at (2.28,1.40) {Predict the\\averages (4)};
+\node[stp] at (e.north west) {Step 4};
+\node[box] (f) at (2.28,0.55) {Single-period ED,\\dispatch by (2)};
+\node[stp] at (f.north west) {Step 5};
+% panel titles
+\node at (5.96,3.72) {LMP and its time averages (\$/MWh)};
+\node at (5.96,1.72) {SoC of each unit (p.u.)};
+% arrows: input to boxes, boxes to panels (same length, at box centers)
+\draw[arr] (n.east |- b) -- node[lab] {past $x_{n,t}$} (b.west);
+\draw[arr] (n.east |- e) -- node[lab] {recent $x_{n,t}$} (e.west);
+\draw[arr] (b.east) -- ++(0.15,0);
+\draw[arr] ([xshift=0.15cm]c.east) -- (c.east);
+\draw[arr] (f.east) -- ++(0.15,0);
+\draw[arr] (b) -- node[vl] {$\alpha_i{+}\beta_i\bar\mu_{i,t}$} (c);
+\draw[arr] (c) -- node[vl] {$\theta_i$} (e);
+\draw[arr] (e) -- node[vl] {$\tilde\mu_{i,t}$} (f);
+\end{tikzpicture}
+\end{document}
