@@ -2,7 +2,7 @@
 
 Code, data pointers, parameters, and full results for the letter
 
-> N. Qi, W. Wei, K. Hou, Z. Liu, H. Jia, D. W. Gao, and N. D. Hatziargyriou, "Online Dispatch of Multi-Duration Storage via Spectral Decomposition of Locational Marginal Prices," submitted to *IEEE Power Engineering Letters*, 2026.
+> N. Qi, W. Wei, K. Hou, Z. Liu, H. Jia, D. W. Gao, and M.-Y. Chow, "Online Dispatch of Multi-Duration Storage via Spectral Decomposition of Locational Marginal Prices," submitted to *IEEE Power Engineering Letters*, 2026.
 
 **SpectraLMP** values each storage unit by its bus locational marginal price (LMP), averaged over the past and future with the unit's time constant. Each unit then follows the high-pass part of its own LMP. Online, the method predicts these averages from past net load and solves a single-period network economic dispatch (ED). It needs no LMP forecasts, no value functions, and no multi-period optimization online.
 
